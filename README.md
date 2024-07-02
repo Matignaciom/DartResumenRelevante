@@ -537,3 +537,393 @@ void main() {
 
 ### Conclusión
 Con esta guía, ahora tienes una comprensión sólida de los conceptos fundamentales de Dart, incluyendo operadores, listas, mapas, funciones, clases, herencia, interfaces, mixins, manejo de excepciones, programación asincrónica y más. ¡Espero que este material te haya sido útil y te animo a seguir practicando y explorando más sobre Dart y Flutter!
+
+---
+
+### Guía Avanzada de Dart para Flutter
+
+---
+
+## Instalación y Configuración
+
+### Cómo instalar Dart
+
+#### Windows
+1. Descarga el SDK de Dart desde [dart.dev](https://dart.dev/get-dart).
+2. Extrae el archivo en una ubicación de tu elección.
+3. Agrega la ruta del SDK de Dart a tu variable de entorno `PATH`.
+
+#### macOS
+1. Usa Homebrew para instalar Dart:
+   ```sh
+   brew tap dart-lang/dart
+   brew install dart
+   ```
+
+#### Linux
+1. Añade el repositorio de Dart:
+   ```sh
+   sudo apt update
+   sudo apt install apt-transport-https
+   sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+   sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+   ```
+2. Instala Dart:
+   ```sh
+   sudo apt update
+   sudo apt install dart
+   ```
+
+### Configuración del Entorno de Desarrollo
+#### Visual Studio Code
+1. Instala el [Dart SDK](https://dart.dev/get-dart).
+2. Instala la extensión de Dart desde el Marketplace de VS Code.
+
+#### IntelliJ IDEA
+1. Instala el [Dart SDK](https://dart.dev/get-dart).
+2. Instala el plugin de Dart desde el repositorio de plugins de IntelliJ.
+
+## Tipos de Datos
+
+### Tipos Numéricos
+```dart
+int entero = 42;
+double decimal = 3.14;
+```
+
+### Cadenas de Caracteres
+```dart
+String simple = 'Hola';
+String interpolada = 'El valor es ${entero + decimal}';
+String multilinea = '''
+Línea 1
+Línea 2
+''';
+```
+
+### Listas, Conjuntos y Mapas
+#### Listas
+```dart
+List<int> numeros = [1, 2, 3];
+```
+
+#### Conjuntos
+```dart
+Set<String> nombres = {'Alice', 'Bob'};
+```
+
+#### Mapas
+```dart
+Map<String, int> telefonos = {
+  'Alice': 1234,
+  'Bob': 5678
+};
+```
+
+### Nulos y Nullable Types
+```dart
+String? nombre;
+nombre = 'Alice'; // Correcto
+nombre = null; // También correcto
+```
+
+## Control de Flujo
+
+### Condicionales
+```dart
+if (entero > 0) {
+  print('El número es positivo.');
+} else if (entero < 0) {
+  print('El número es negativo.');
+} else {
+  print('El número es cero.');
+}
+```
+
+### Operadores Ternarios
+```dart
+String resultado = entero > 0 ? 'Positivo' : 'No positivo';
+```
+
+### Bucles
+```dart
+for (int i = 0; i < 5; i++) {
+  print('i: $i');
+}
+
+while (entero > 0) {
+  entero--;
+}
+
+do {
+  entero++;
+} while (entero < 5);
+```
+
+## Funciones Avanzadas
+
+### Funciones Anónimas y Lambdas
+```dart
+var sumar = (int a, int b) => a + b;
+print(sumar(2, 3)); // 5
+```
+
+### Closures
+```dart
+Function makeAdder(int addBy) {
+  return (int i) => addBy + i;
+}
+
+var add2 = makeAdder(2);
+print(add2(3)); // 5
+```
+
+### Parámetros Nombrados y Opcionales
+```dart
+void saludar(String nombre, {String? mensaje}) {
+  print('Hola $nombre, ${mensaje ?? 'bienvenido'}');
+}
+saludar('Alice', mensaje: '¿cómo estás?');
+```
+
+## Programación Orientada a Objetos Avanzada
+
+### Constructores
+```dart
+class Persona {
+  String nombre;
+  int edad;
+
+  Persona(this.nombre, this.edad);
+  Persona.named(this.nombre, this.edad);
+
+  // Constructor constante
+  const Persona.constant(this.nombre, this.edad);
+
+  // Constructor fábrica
+  factory Persona.fromJson(Map<String, dynamic> json) {
+    return Persona(json['nombre'], json['edad']);
+  }
+}
+```
+
+### Sobrecarga de Operadores
+```dart
+class Vector {
+  final int x, y;
+
+  Vector(this.x, this.y);
+
+  Vector operator +(Vector v) => Vector(x + v.x, y + v.y);
+}
+
+void main() {
+  final v1 = Vector(2, 3);
+  final v2 = Vector(4, 5);
+  final v3 = v1 + v2;
+  print('(${v3.x}, ${v3.y})'); // (6, 8)
+}
+```
+
+### Enumeraciones (Enums)
+```dart
+enum Estado { INICIADO, EN_PROGRESO, TERMINADO }
+
+void main() {
+  Estado estado = Estado.EN_PROGRESO;
+
+  switch (estado) {
+    case Estado.INICIADO:
+      print('Iniciado');
+      break;
+    case Estado.EN_PROGRESO:
+      print('En progreso');
+      break;
+    case Estado.TERMINADO:
+      print('Terminado');
+      break;
+  }
+}
+```
+
+## Asincronía Avanzada
+
+### Future y Completer
+```dart
+Future<int> obtenerValor() async {
+  return 42;
+}
+
+Completer<int> completer = Completer<int>();
+
+void main() {
+  completer.complete(42);
+  completer.future.then((value) => print(value));
+}
+```
+
+### Streams Avanzados
+```dart
+Stream<int> contar(int max) async* {
+  for (int i = 0; i <= max; i++) {
+    yield i;
+  }
+}
+
+void main() {
+  contar(5).listen((numero) {
+    print(numero);
+  });
+}
+```
+
+## Gestión de Paquetes
+
+### pub.dev
+Para encontrar y usar paquetes en Dart, visita [pub.dev](https://pub.dev).
+
+### Archivo `pubspec.yaml`
+```yaml
+name: mi_paquete
+version: 1.0.0
+description: Descripción de mi paquete
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  http: ^0.13.3
+```
+
+### Crear y Publicar Paquetes
+1. Crea el archivo `pubspec.yaml` con la configuración adecuada.
+2. Añade tu código en el directorio `lib`.
+3. Publica tu paquete usando:
+   ```sh
+   dart pub publish
+   ```
+
+## Testing
+
+### Pruebas Unitarias
+```dart
+import 'package:test/test.dart';
+
+void main() {
+  test('sumar dos números', () {
+    expect(2 + 3, 5);
+  });
+}
+```
+
+### Mocks y Stubs
+```dart
+import 'package:mockito/mockito.dart';
+
+class Servicio {
+  String obtenerDato() => 'dato';
+}
+
+class MockServicio extends Mock implements Servicio {}
+
+void main() {
+  var servicio = MockServicio();
+  when(servicio.obtenerDato()).thenReturn('dato falso');
+
+  print(servicio.obtenerDato()); // 'dato falso'
+}
+```
+
+### Integración Continua
+Configura CI con GitHub Actions:
+```yaml
+name: Dart CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    -
+
+ name: Install Dart
+      uses: dart-lang/setup-dart@v1
+    - name: Install dependencies
+      run: dart pub get
+    - name: Run tests
+      run: dart test
+```
+
+## Interoperabilidad y Plugins
+
+### Crear Plugins en Flutter
+1. Crea un nuevo plugin:
+   ```sh
+   flutter create --template=plugin nombre_del_plugin
+   ```
+2. Añade el código de la plataforma nativa en los directorios `android` y `ios`.
+3. Usa el plugin en tu proyecto Flutter añadiéndolo a `pubspec.yaml`.
+
+### Integración con APIs de Plataforma
+Para invocar código nativo desde Flutter, usa los canales de plataforma (Platform Channels).
+
+### Integración con Flutter Web y Desktop
+1. Agrega soporte web o desktop:
+   ```sh
+   flutter create .
+   flutter build web
+   flutter build windows
+   ```
+
+### Ejemplos de Casos de Uso del Mundo Real
+
+#### Integración con APIs REST
+```dart
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Future<void> fetchPost() async {
+  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+
+  if (response.statusCode == 200) {
+    var data = jsonDecode(response.body);
+    print(data);
+  } else {
+    throw Exception('Failed to load post');
+  }
+}
+```
+
+#### Autenticación con Firebase Auth
+```dart
+import 'package:firebase_auth/firebase_auth.dart';
+
+Future<User?> signInWithEmail(String email, String password) async {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    return userCredential.user;
+  } catch (e) {
+    print(e);
+    return null;
+  }
+}
+```
+
+## Pruebas y Mejora del Rendimiento
+
+### Técnicas de Optimización
+- Usa el widget `RepaintBoundary` para evitar redibujar innecesariamente.
+- Implementa Lazy Loading en listas largas.
+- Minimiza el uso de operaciones costosas en `build()`.
+
+### Herramientas de Profiling
+- Flutter DevTools: Herramienta poderosa para debugging y profiling.
+- Dart Observatory: Permite inspeccionar el rendimiento de aplicaciones Dart.
+
+## Conclusión
+
+Esta guía avanzada de Dart para Flutter abarca una amplia gama de temas que van desde la instalación y configuración básica hasta técnicas avanzadas de programación, gestión de estado, pruebas y optimización. Esperamos que esta guía te ayude a profundizar tus conocimientos y habilidades en Dart y Flutter, permitiéndote construir aplicaciones móviles robustas y de alto rendimiento.
