@@ -285,194 +285,59 @@ void main() {
   // Mapas
   Map<String, int> edad = {
     'Juan': 25,
-    'Maria': 30,
+    'Maria': 30
+
+,
     'Pedro': 20
   };
-  edad['Luis'] = 35;
+  edad['Ana'] = 22;
   edad.forEach((key, value) {
     print('Clave: $key, Valor: $value');
   });
 }
 ```
 
-Con esto, tienes una buena base para trabajar con listas y mapas en Dart.
+### Funciones en Dart
 
-### Declaración de Funciones
-En Dart, las funciones se declaran utilizando la palabra clave `void` si no devuelven un valor, o el tipo de valor que devuelven.
+Las funciones en Dart son bloques de código reutilizables que realizan una tarea específica. Se pueden definir utilizando la palabra clave `void` si no retornan un valor, o especificando el tipo de valor que retornan.
 
-#### Función Simple
+#### Definir una Función
 ```dart
 void saludar() {
-  print('¡Hola, mundo!');
-}
-```
-
-Para llamar a la función:
-```dart
-saludar();
-```
-
-### Funciones con Argumentos
-Las funciones pueden tomar argumentos que se pasan al llamarlas.
-
-#### Argumentos Posicionales
-Estos argumentos se pasan en un orden específico.
-
-```dart
-void saludar(String nombre) {
-  print('¡Hola, $nombre!');
+  print('Hola!');
 }
 
-saludar('Juan'); // ¡Hola, Juan!
-```
-
-#### Argumentos con Valores Predeterminados
-Puedes proporcionar valores predeterminados a los argumentos.
-
-```dart
-void saludar([String nombre = 'amigo']) {
-  print('¡Hola, $nombre!');
-}
-
-saludar(); // ¡Hola, amigo!
-saludar('María'); // ¡Hola, María!
-```
-
-### Tipos de Parámetros
-
-#### Parámetros Nombrados
-Los parámetros nombrados se especifican por su nombre al llamar a la función. Son opcionales por defecto, pero puedes hacerlos obligatorios utilizando `required`.
-
-```dart
-void saludar({String? nombre, int? edad}) {
-  print('¡Hola, $nombre! Tienes $edad años.');
-}
-
-saludar(nombre: 'Juan', edad: 25); // ¡Hola, Juan! Tienes 25 años.
-```
-
-#### Parámetros Nombrados Requeridos
-Para hacer que los parámetros nombrados sean obligatorios, usa `required`.
-
-```dart
-void saludar({required String nombre, required int edad}) {
-  print('¡Hola, $nombre! Tienes $edad años.');
-}
-
-saludar(nombre: 'Juan', edad: 25); // ¡Hola, Juan! Tienes 25 años.
-```
-
-### Devolver un Valor
-Para devolver un valor desde una función, especifica el tipo de valor de retorno y usa la palabra clave `return`.
-
-#### Función que Devuelve un Valor
-```dart
 int sumar(int a, int b) {
   return a + b;
 }
-
-int resultado = sumar(3, 4); // resultado ahora es 7
-print(resultado); // 7
 ```
 
-### Ejemplo Completo
-
-Aquí tienes un ejemplo que combina diferentes tipos de parámetros y una función que devuelve un valor:
-
-```dart
-// Función con parámetros posicionales y valores predeterminados
-void saludar([String nombre = 'amigo']) {
-  print('¡Hola, $nombre!');
-}
-
-// Función con parámetros nombrados y devolución de valor
-double calcularArea({required double base, required double altura}) {
-  return base * altura / 2;
-}
-
-// Función que no devuelve valor
-void mostrarArea(double area) {
-  print('El área es $area');
-}
-
-void main() {
-  saludar(); // ¡Hola, amigo!
-  saludar('María'); // ¡Hola, María!
-
-  double area = calcularArea(base: 5, altura: 10);
-  mostrarArea(area); // El área es 25.0
-}
-```
-
-Con este conocimiento, puedes trabajar con funciones en Dart, pasando argumentos y devolviendo valores según sea necesario.
-
-### Clases y Atributos
-En Dart, una clase es una plantilla para crear objetos. Puedes definir atributos dentro de la clase.
-
-#### Definición de una Clase con Atributos
-```dart
-class Persona {
-  String nombre;
-  int edad;
-
-  Persona(this.nombre, this.edad); // Constructor
-}
-```
-
-### Constructor
-El constructor es una función especial que se llama cuando se crea una instancia de la clase. En el ejemplo anterior, el constructor toma dos argumentos, `nombre` y `edad`.
-
-#### Instancia de la Clase
+#### Llamar a una Función
 ```dart
 void main() {
-  Persona persona1 = Persona('Juan', 25);
-  print(persona1.nombre); // Juan
-  print(persona1.edad); // 25
+  saludar(); // Llama a la función saludar
+  int resultado = sumar(3, 4); // Llama a la función sumar
+  print(resultado); // Imprime 7
 }
 ```
 
-### Modificadores de Acceso
-En Dart, los atributos y métodos son públicos por defecto. Para hacerlos privados, usa el guion bajo `_` antes del nombre del atributo o método.
+#### Funciones Flecha
+Las funciones flecha son una forma corta de definir funciones que contienen una sola expresión.
 
-#### Atributos Privados
 ```dart
-class Persona {
-  String _nombre;
-  int _edad;
+int multiplicar(int a, int b) => a * b;
 
-  Persona(this._nombre, this._edad);
+void main() {
+  int resultado = multiplicar(3, 4); // Llama a la función multiplicar
+  print(resultado); // Imprime 12
 }
 ```
 
-### Getters y Setters
-Los getters y setters te permiten controlar el acceso a los atributos de una clase.
+### Clases en Dart
 
-#### Definición de Getters y Setters
-```dart
-class Persona {
-  String _nombre;
-  int _edad;
+Las clases son una forma de encapsular datos y comportamientos relacionados. Puedes crear instancias de una clase para trabajar con sus datos y métodos.
 
-  Persona(this._nombre, this._edad);
-
-  String get nombre => _nombre;
-
-  set nombre(String nombre) {
-    _nombre = nombre;
-  }
-
-  int get edad => _edad;
-
-  set edad(int edad) {
-    _edad = edad;
-  }
-}
-```
-
-### Herencia
-La herencia permite que una clase derive de otra, heredando sus atributos y métodos.
-
-#### Ejemplo de Herencia
+#### Definir una Clase
 ```dart
 class Persona {
   String nombre;
@@ -480,297 +345,195 @@ class Persona {
 
   Persona(this.nombre, this.edad);
 
-  void mostrarInfo() {
-    print('Nombre: $nombre, Edad: $edad');
+  void saludar() {
+    print('Hola, me llamo $nombre y tengo $edad años.');
   }
-}
-
-class Empleado extends Persona {
-  double salario;
-
-  Empleado(String nombre, int edad, this.salario) : super(nombre, edad);
-
-  void mostrarSalario() {
-    print('Salario: $salario');
-  }
-}
-
-void main() {
-  Empleado empleado1 = Empleado('Maria', 30, 50000);
-  empleado1.mostrarInfo(); // Nombre: Maria, Edad: 30
-  empleado1.mostrarSalario(); // Salario: 50000.0
 }
 ```
 
-### Clases Abstractas
-Una clase abstracta no puede ser instanciada y puede contener métodos abstractos (sin implementación).
-
-#### Definición de una Clase Abstracta
+#### Crear una Instancia de una Clase
 ```dart
-abstract class Figura {
-  void dibujar(); // Método abstracto
+void main() {
+  Persona persona = Persona('Juan', 25);
+  persona.saludar(); // Llama al método saludar
 }
+```
 
-class Circulo extends Figura {
+#### Herencia
+La herencia permite que una clase herede propiedades y métodos de otra clase.
+
+```dart
+class Empleado extends Persona {
+  String puesto;
+
+  Empleado(String nombre, int edad, this.puesto) : super(nombre, edad);
+
   @override
-  void dibujar() {
-    print('Dibujar un círculo');
+  void saludar() {
+    super.saludar();
+    print('Soy un $puesto.');
   }
 }
 
 void main() {
-  Circulo circulo = Circulo();
-  circulo.dibujar(); // Dibujar un círculo
+  Empleado empleado = Empleado('Maria', 30, 'Ingeniera');
+  empleado.saludar(); // Llama al método saludar
 }
 ```
 
 ### Interfaces
-En Dart, cualquier clase puede actuar como una interfaz. Simplemente implementa la clase y define los métodos.
+En Dart, las interfaces se implementan utilizando la palabra clave `implements`. Al implementar una interfaz, una clase debe proporcionar implementaciones para todos los métodos de la interfaz.
 
-#### Definición de una Interfaz
+#### Ejemplo de Interface
 ```dart
-class Vehiculo {
-  void encender() => print('Vehículo encendido');
-  void apagar() => print('Vehículo apagado');
+abstract class Vehiculo {
+  void encender();
+  void apagar();
 }
 
 class Coche implements Vehiculo {
   @override
-  void encender() => print('Coche encendido');
+  void encender() {
+    print('El coche está encendido');
+  }
 
   @override
-  void apagar() => print('Coche apagado');
+  void apagar() {
+    print('El coche está apagado');
+  }
 }
 
 void main() {
-  Coche coche = Coche();
-  coche.encender(); // Coche encendido
-  coche.apagar(); // Coche apagado
+  Coche miCoche = Coche();
+  miCoche.encender(); // El coche está encendido
+  miCoche.apagar(); // El coche está apagado
 }
 ```
 
 ### Mixins
-Un mixin es una forma de reutilizar código en múltiples clases. Usas la palabra clave `with`.
+Los mixins permiten compartir métodos entre múltiples clases sin usar herencia. Los mixins se definen utilizando la palabra clave `mixin`.
 
-#### Definición de un Mixin
+#### Ejemplo de Mixin
 ```dart
 mixin Volador {
-  void volar() => print('Estoy volando');
+  void volar() {
+    print('Estoy volando');
+  }
 }
 
-class Animal {
-  void caminar() => print('Estoy caminando');
-}
-
-class Pájaro extends Animal with Volador {}
+class Ave with Volador {}
 
 void main() {
-  Pájaro pajaro = Pájaro();
-  pajaro.caminar(); // Estoy caminando
-  pajaro.volar(); // Estoy volando
+  Ave miAve = Ave();
+  miAve.volar(); // Estoy volando
 }
 ```
 
-### Ejemplo Completo
-A continuación, se muestra un ejemplo completo que incluye clases, herencia, getters y setters, y mixins:
+### Manejo de Excepciones
+El manejo de excepciones en Dart se realiza utilizando bloques `try`, `catch` y `finally`.
 
+#### Ejemplo de Manejo de Excepciones
 ```dart
-// Clase base
-class Persona {
-  String _nombre;
-  int _edad;
-
-  Persona(this._nombre, this._edad);
-
-  // Getter y setter para nombre
-  String get nombre => _nombre;
-
-  set nombre(String nombre) {
-    _nombre = nombre;
-  }
-
-  // Getter y setter para edad
-  int get edad => _edad;
-
-  set edad(int edad) {
-    _edad = edad;
-  }
-
-  void mostrarInfo() {
-    print('Nombre: $_nombre, Edad: $_edad');
-  }
-}
-
-// Mixin
-mixin Trabajador {
-  void trabajar() => print('Estoy trabajando');
-}
-
-// Clase derivada con mixin
-class Empleado extends Persona with Trabajador {
-  double salario;
-
-  Empleado(String nombre, int edad, this.salario) : super(nombre, edad);
-
-  void mostrarSalario() {
-    print('Salario: $salario');
-  }
-}
-
 void main() {
-  Empleado empleado1 = Empleado('Juan', 25, 50000);
-  empleado1.mostrarInfo(); // Nombre: Juan, Edad: 25
-  empleado1.trabajar(); // Estoy trabajando
-  empleado1.mostrarSalario(); // Salario: 50000.0
+  try {
+    int resultado = 10 ~/ 0;
+    print(resultado);
+  } catch (e) {
+    print('Error: $e');
+  } finally {
+    print('Esto siempre se ejecuta');
+  }
 }
 ```
 
-Con esto, tienes una comprensión básica y completa de cómo trabajar con clases, atributos, constructores, instancias, modificadores de acceso, getters y setters, herencia, clases abstractas, interfaces y mixins en Dart.
-
-### Future
-Un `Future` representa un valor o error que estará disponible en algún momento en el futuro. Los `Future` son comunes en Dart para operaciones asíncronas.
+### Futures y Async/Await
+Dart es un lenguaje asincrónico que permite realizar operaciones no bloqueantes utilizando `Future`, `async` y `await`.
 
 #### Ejemplo de Future
 ```dart
-Future<String> obtenerNombre() async {
-  return 'Juan';
+Future<String> fetchUserOrder() {
+  // Simula una demora en la red
+  return Future.delayed(Duration(seconds: 2), () => 'Café con leche');
 }
-```
 
-### then, catchError y whenComplete
-Puedes manejar los resultados y errores de un `Future` utilizando los métodos `then`, `catchError` y `whenComplete`.
-
-#### then
-`then` se usa para manejar el resultado exitoso de un `Future`.
-
-```dart
 void main() {
-  obtenerNombre().then((nombre) {
-    print(nombre); // Juan
+  fetchUserOrder().then((order) {
+    print('Orden recibida: $order');
   });
-}
-
-Future<String> obtenerNombre() async {
-  return 'Juan';
+  print('Esperando la orden...');
 }
 ```
 
-#### catchError
-`catchError` se usa para manejar errores que ocurren durante la ejecución de un `Future`.
-
+#### Ejemplo de Async/Await
 ```dart
-void main() {
-  obtenerNombre().then((nombre) {
-    print(nombre);
-  }).catchError((error) {
-    print('Ocurrió un error: $error');
-  });
+Future<String> fetchUserOrder() async {
+  // Simula una demora en la red
+  return await Future.delayed(Duration(seconds: 2), () => 'Café con leche');
 }
 
-Future<String> obtenerNombre() async {
-  throw 'No se pudo obtener el nombre';
-}
-```
-
-#### whenComplete
-`whenComplete` se usa para ejecutar algún código cuando el `Future` completa, independientemente de si fue exitoso o fallido.
-
-```dart
-void main() {
-  obtenerNombre().then((nombre) {
-    print(nombre);
-  }).catchError((error) {
-    print('Ocurrió un error: $error');
-  }).whenComplete(() {
-    print('Operación completada');
-  });
-}
-
-Future<String> obtenerNombre() async {
-  throw 'No se pudo obtener el nombre';
-}
-```
-
-### async y await
-El uso de `async` y `await` hace que el código asíncrono se vea y se comporte más como código síncrono.
-
-#### await
-`await` se usa para esperar el resultado de un `Future`.
-
-```dart
 void main() async {
-  try {
-    String nombre = await obtenerNombre();
-    print(nombre);
-  } catch (error) {
-    print('Ocurrió un error: $error');
+  print('Esperando la orden...');
+  String order = await fetchUserOrder();
+  print('Orden recibida: $order');
+}
+```
+
+### Streams
+Los streams proporcionan una secuencia de datos asincrónicos. Puedes usar streams para manejar eventos que ocurren en el tiempo.
+
+#### Ejemplo de Stream
+```dart
+Stream<int> contador(int max) async* {
+  for (int i = 0; i <= max; i++) {
+    await Future.delayed(Duration(seconds: 1));
+    yield i;
   }
 }
 
-Future<String> obtenerNombre() async {
-  return 'Juan';
+void main() {
+  Stream<int> stream = contador(5);
+  stream.listen((data) {
+    print('Contador: $data');
+  });
 }
 ```
 
-#### Manejo de Errores con async y await
-Puedes manejar errores en una función `async` usando `try-catch`.
+### Programación Orientada a Objetos (POO)
+Dart es un lenguaje orientado a objetos y soporta características como encapsulación, herencia y polimorfismo.
 
+#### Ejemplo Completo de POO
 ```dart
-void main() async {
-  try {
-    String nombre = await obtenerNombre();
-    print(nombre);
-  } catch (error) {
-    print('Ocurrió un error: $error');
-  } finally {
-    print('Operación completada');
+class Animal {
+  void sonido() {
+    print('El animal hace un sonido');
   }
 }
 
-Future<String> obtenerNombre() async {
-  throw 'No se pudo obtener el nombre';
-}
-```
-
-### Ejemplo Completo
-Aquí tienes un ejemplo completo que muestra cómo usar `Future`, `then`, `catchError`, `whenComplete`, `async`, `await`, y el manejo de errores:
-
-```dart
-void main() async {
-  // Usando then, catchError y whenComplete
-  obtenerNombre()
-      .then((nombre) {
-        print('Nombre: $nombre');
-      })
-      .catchError((error) {
-        print('Ocurrió un error: $error');
-      })
-      .whenComplete(() {
-        print('Operación completada con then');
-      });
-
-  // Usando async y await
-  try {
-    String nombre = await obtenerNombre();
-    print('Nombre: $nombre');
-  } catch (error) {
-    print('Ocurrió un error: $error');
-  } finally {
-    print('Operación completada con async/await');
+class Perro extends Animal {
+  @override
+  void sonido() {
+    print('El perro ladra');
   }
 }
 
-Future<String> obtenerNombre() async {
-  await Future.delayed(Duration(seconds: 2)); // Simulando una operación asíncrona
-  return 'Juan';
+class Gato extends Animal {
+  @override
+  void sonido() {
+    print('El gato maúlla');
+  }
+}
+
+void main() {
+  Animal miAnimal = Animal();
+  miAnimal.sonido(); // El animal hace un sonido
+
+  Perro miPerro = Perro();
+  miPerro.sonido(); // El perro ladra
+
+  Gato miGato = Gato();
+  miGato.sonido(); // El gato maúlla
 }
 ```
 
-### Resumen
-- **Future**: Representa un valor que estará disponible en el futuro.
-- **then**: Maneja el resultado exitoso de un `Future`.
-- **catchError**: Maneja errores de un `Future`.
-- **whenComplete**: Ejecuta código cuando el `Future` completa, independientemente del resultado.
-- **async y await**: Permiten escribir código asíncrono de manera más legible y manejan resultados y errores de `Future`.
-
-Con estos conceptos, puedes manejar la programación asíncrona en Dart de manera efectiva.
+### Conclusión
+Con esta guía, ahora tienes una comprensión sólida de los conceptos fundamentales de Dart, incluyendo operadores, listas, mapas, funciones, clases, herencia, interfaces, mixins, manejo de excepciones, programación asincrónica y más. ¡Espero que este material te haya sido útil y te animo a seguir practicando y explorando más sobre Dart y Flutter!
